@@ -128,7 +128,6 @@ class JournalCard extends StatelessWidget {
       map["is_editing"] = true;
     }
         map["journal"] =  innerJournal;
-        map["is_editing"];
 
     Navigator.pushNamed(
       context,
