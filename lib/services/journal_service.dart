@@ -12,21 +12,21 @@ class JournalService {
     interceptors: [LoggingInterceptor()],
   );
 
-  String getURL() {
+  String getUrl() {
     return "$url$resource";
   }
 
   Uri getUri() {
-    return Uri.parse(getURL());
+    return Uri.parse(getUrl());
   }
 
   Future<bool> register(Journal journal) async {
-    String journalJSON = json.encode(journal.toMap());
+    String journalJournal = json.encode(journal.toMap());
 
     http.Response response = await client.post(
       getUri(),
       headers: {'Content-type': 'application/json'},
-      body: journalJSON,
+      body: journalJournal,
     );
 
     if (response.statusCode == 201) {
@@ -35,6 +35,24 @@ class JournalService {
 
     return false;
   }
+
+  Future<bool> edit(String id, Journal journal) async{
+    String journalJournal = json.encode(journal.toMap());
+
+    http.Response response = await client.put(
+      Uri.parse("{$getUrl()}"),
+      headers: {'Content-type': 'application/json'},
+      body: journalJournal,
+    );
+    if(response.statusCode == 200){
+      return true;
+    }
+      return false;
+  }
+
+
+
+
 
   Future<List<Journal>> getAll() async {
     http.Response response = await client.get(getUri());

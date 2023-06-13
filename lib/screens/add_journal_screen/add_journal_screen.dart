@@ -5,7 +5,8 @@ import '../../services/journal_service.dart';
 
 class AddJournalScreen extends StatefulWidget {
   final Journal journal;
-  AddJournalScreen({Key? key, required this.journal}) : super(key: key);
+  final bool isEditing;
+  const AddJournalScreen({Key? key, required this.journal, required this.isEditing}) : super(key: key);
 
   @override
   State<AddJournalScreen> createState() => _AddJournalScreenState();
