@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-
 import '../../../helpers/weekday.dart';
 import '../../../models/journal.dart';
 import '../../add_journal_screen/add_journal_screen.dart';
+
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
@@ -20,9 +20,8 @@ class JournalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (journal != null) {
       return InkWell(
-          onTap: () {
-            callAddJournalScreen(context, journal: journal);
-          },
+          onTap:(){},
+
           child: Container(
             height: 133,
             margin: const EdgeInsets.all(8),
@@ -96,9 +95,7 @@ class JournalCard extends StatelessWidget {
       );
     } else {
       return InkWell(
-        onTap: () {
-          callAddJournalScreen(context, journal: journal);
-        },
+        onTap: () {},
         child: Container(
           height: 115,
           alignment: Alignment.center,
@@ -112,27 +109,16 @@ class JournalCard extends StatelessWidget {
     }
   }
 
-  callAddJournalScreen(BuildContext context, {Journal? journal}) {
-    Journal innerJournal = Journal(
-    id: const Uuid().v1(),
-    content: "",
-    createdAt: showedDate,
-    updatedAt: showedDate,
-    );
-    Map<String, dynamic>map = {};
-
-    if(journal != null){
-      innerJournal = journal;
-      map["is_editing"] = false;
-    }else{
-      map["is_editing"] = true;
-    }
-        map["journal"] =  innerJournal;
-
+  callAddJournalScreen(BuildContext context) {
     Navigator.pushNamed(
       context,
-      'add-journal',
-      arguments: map,
+      "add-journal",
+      arguments: Journal(
+        id: const Uuid().v1(),
+        content: "",
+        createdAt: showedDate,
+        updatedAt: showedDate,
+      ),
     ).then((value) {
       refreshFunction();
 

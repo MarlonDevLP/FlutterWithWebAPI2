@@ -5,8 +5,7 @@ import '../../services/journal_service.dart';
 
 class AddJournalScreen extends StatefulWidget {
   final Journal journal;
-  final bool isEditing;
-  AddJournalScreen({Key? key, required this.journal, required this.isEditing,}) : super(key: key);
+  const AddJournalScreen({Key? key, required this.journal, }) : super(key: key);
 
   @override
   State<AddJournalScreen> createState() => _AddJournalScreenState();
@@ -22,7 +21,8 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: Text( WeekDay(widget.journal.createdAt).toString(),style: const TextStyle(fontSize: 16),),
+        title: Text(WeekDay(widget.journal.createdAt).toString(),
+          style: const TextStyle(fontSize: 16),),
         actions: [
           IconButton(
             onPressed: () {
@@ -42,7 +42,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
             hintText: 'No que você está pensando hoje?',),
           controller: contentController,
           keyboardType: TextInputType.multiline,
-          style:  const TextStyle(fontSize: 22),
+          style: const TextStyle(fontSize: 22),
           expands: true,
           maxLines: null,
           minLines: null,
@@ -52,10 +52,8 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
   }
 
   registerJournal(BuildContext context) async {
-    widget.journal.content = contentController.text;
-
     JournalService journalService = JournalService();
-      if(isEditing)
+    widget.journal.content = contentController.text;
     journalService.register(widget.journal).then((value) {
       if (value) {
         Navigator.pop(context, DisposeStatus.success);
@@ -67,5 +65,6 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
 }
 
 enum DisposeStatus { exit, error, success }
+
 
 

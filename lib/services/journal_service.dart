@@ -5,7 +5,8 @@ import '../models/journal.dart';
 import 'http_interceptors.dart';
 
 class JournalService {
-  static const String url = "http://10.0.0.106:3000/";
+  // Consiga seu IP usando o comando "ipconfig" no Windows ou "ifconfig" no Linux.
+  static const String url = " http://10.0.0.106:3000/";
   static const String resource = "journals/";
 
   http.Client client = InterceptedClient.build(
@@ -21,12 +22,12 @@ class JournalService {
   }
 
   Future<bool> register(Journal journal) async {
-    String journalJournal = json.encode(journal.toMap());
+    String journalJSON = json.encode(journal.toMap());
 
     http.Response response = await client.post(
       getUri(),
       headers: {'Content-type': 'application/json'},
-      body: journalJournal,
+      body: journalJSON,
     );
 
     if (response.statusCode == 201) {
@@ -35,24 +36,6 @@ class JournalService {
 
     return false;
   }
-
-  Future<bool> edit(String id, Journal journal) async{
-    String journalJournal = json.encode(journal.toMap());
-
-    http.Response response = await client.put(
-      Uri.parse("{$getUrl()}"),
-      headers: {'Content-type': 'application/json'},
-      body: journalJournal,
-    );
-    if(response.statusCode == 200){
-      return true;
-    }
-      return false;
-  }
-
-
-
-
 
   Future<List<Journal>> getAll() async {
     http.Response response = await client.get(getUri());
@@ -72,3 +55,17 @@ class JournalService {
     return result;
   }
 }
+
+// Future<bool> edit(String id, Journal journal) async{
+//   String jsonJournal = json.encode(journal.toMap());
+//
+//   http.Response response = await client.put(
+//     Uri.parse("{$getUrl()}$id"),
+//     headers: {'Content-type': 'application/json'},
+//     body: jsonJournal,
+//   );
+//   if(response.statusCode == 200){
+//     return true;
+//   }
+//     return false;
+// }
