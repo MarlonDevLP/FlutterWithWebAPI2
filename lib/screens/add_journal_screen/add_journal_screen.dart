@@ -5,6 +5,7 @@ import '../../services/journal_service.dart';
 
 class AddJournalScreen extends StatefulWidget {
   final Journal journal;
+
   const AddJournalScreen({Key? key, required this.journal, }) : super(key: key);
 
   @override
@@ -12,7 +13,7 @@ class AddJournalScreen extends StatefulWidget {
 }
 
 class _AddJournalScreenState extends State<AddJournalScreen> {
-  final TextEditingController contentController = TextEditingController();
+   TextEditingController contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
