@@ -24,3 +24,4 @@ class LoggingInterceptor implements InterceptorContract {
     return data;
   }
 }
+

@@ -1,4 +1,3 @@
-
 /// Gera dia da semana em português
 class WeekDay {
   DateTime date;
@@ -40,6 +39,6 @@ class WeekDay {
 
   @override
   String toString() {
-    return "${long.toLowerCase()}, ${date.day} do ${date.month} de ${date.year},";
+    return "${long.toLowerCase()}, ${date.day} do ${date.month} de ${date.year}";
   }
 }

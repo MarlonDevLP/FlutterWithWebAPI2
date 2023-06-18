@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../../../helpers/weekday.dart';
 import '../../../models/journal.dart';
-import '../../add_journal_screen/add_journal_screen.dart';
 
 
 class JournalCard extends StatelessWidget {
@@ -98,7 +97,7 @@ class JournalCard extends StatelessWidget {
     } else {
       return InkWell(
         onTap: () {
-          callAddJournalScreen(context,);
+          callAddJournalScreen(context);
         },
         child: Container(
           height: 115,
@@ -121,24 +120,32 @@ class JournalCard extends StatelessWidget {
       updatedAt: showedDate,
     );
 
+    Map<String, dynamic> map = {};
     if(journal != null){
       innerJournal = journal;
+      map["is_editing"] = false;
+    }else{
+      map["is_editing"] = true;
     }
+
+    map["journal"] = innerJournal;
+
 
     Navigator.pushNamed(
       context,
       "add-journal",
-      arguments: innerJournal,
+      arguments: map,
     ).then((value) {
       refreshFunction();
 
-      if (value == DisposeStatus.success) {
+      if (value != null && value == true) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Registro salvo com sucesso."),
           ),
         );
-      } else if (value == DisposeStatus.error) {
+      }
+      else if (value == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Houve uma falha ao registar."),
