@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       database = {};
+
       for (Journal journal in listJournal) {
         database[journal.id] = journal;
       }

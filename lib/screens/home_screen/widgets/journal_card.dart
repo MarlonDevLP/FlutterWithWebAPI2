@@ -57,9 +57,9 @@ class JournalCard extends StatelessWidget {
 
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
-                        child: Container(
+
+
+                        Container(
                           height: 38,
                           width: 75,
                           alignment: Alignment.center,
@@ -71,7 +71,7 @@ class JournalCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           child: Text(WeekDay(journal!.createdAt).short),
                         ),
-                      ),
+
                     ],
                   ),
                   Expanded(
