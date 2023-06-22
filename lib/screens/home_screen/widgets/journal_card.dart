@@ -1,13 +1,15 @@
+import 'package:appdiariooo/services/journal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../../../helpers/weekday.dart';
 import '../../../models/journal.dart';
-
+import '../../commom/confirmation_dialog.dart';
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
   final Function refreshFunction;
+
   const JournalCard({
     Key? key,
     this.journal,
@@ -19,10 +21,9 @@ class JournalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (journal != null) {
       return InkWell(
-          onTap:(){
+          onTap: () {
             callAddJournalScreen(context, journal: journal);
           },
-
           child: Container(
             height: 133,
             margin: const EdgeInsets.all(8),
@@ -30,8 +31,8 @@ class JournalCard extends StatelessWidget {
               height: 115,
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-              color: Colors.black26,
-              borderRadius: BorderRadius.circular(26),
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(26),
               ),
               child: Row(
                 children: [
@@ -44,7 +45,9 @@ class JournalCard extends StatelessWidget {
                         decoration: const BoxDecoration(
                           color: Colors.black54,
                           border: Border(
-                              right: BorderSide(color: Colors.black87,),
+                              right: BorderSide(
+                                color: Colors.black87,
+                              ),
                               bottom: BorderSide(color: Colors.black87)),
                         ),
                         padding: const EdgeInsets.all(16),
@@ -54,24 +57,20 @@ class JournalCard extends StatelessWidget {
                               fontSize: 32,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
-
                         ),
                       ),
-
-
-                        Container(
-                          height: 38,
-                          width: 75,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              right: BorderSide(color: Colors.black87),
-                            ),
+                      Container(
+                        height: 38,
+                        width: 75,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            right: BorderSide(color: Colors.black87),
                           ),
-                          padding: const EdgeInsets.all(8),
-                          child: Text(WeekDay(journal!.createdAt).short),
                         ),
-
+                        padding: const EdgeInsets.all(8),
+                        child: Text(WeekDay(journal!.createdAt).short),
+                      ),
                     ],
                   ),
                   Expanded(
@@ -89,11 +88,17 @@ class JournalCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                  IconButton(
+                      onPressed: () {
+                        removeJournalScreen(context);
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                      )),
                 ],
               ),
             ),
-          )
-      );
+          ));
     } else {
       return InkWell(
         onTap: () {
@@ -121,15 +126,14 @@ class JournalCard extends StatelessWidget {
     );
 
     Map<String, dynamic> map = {};
-    if(journal != null){
+    if (journal != null) {
       innerJournal = journal;
       map["is_editing"] = false;
-    }else{
+    } else {
       map["is_editing"] = true;
     }
 
     map["journal"] = innerJournal;
-
 
     Navigator.pushNamed(
       context,
@@ -144,8 +148,7 @@ class JournalCard extends StatelessWidget {
             content: Text("Registro salvo com sucesso."),
           ),
         );
-      }
-      else if (value == null) {
+      } else if (value == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Houve uma falha ao registar."),
@@ -154,5 +157,34 @@ class JournalCard extends StatelessWidget {
       }
     });
   }
-}
 
+  removeJournalScreen(BuildContext context) {
+    JournalService service = JournalService();
+    if (journal != null) {
+      showConfirmationDialog(
+        context,
+        content: "vai REMOVER MESMO??\n${WeekDay(journal!.createdAt)}",
+        affirmativeOption: "remover",
+      ).then((value){
+        if(value != null){
+          if(value){
+            service.delete(journal!.id).then((value) {
+              if (value == true) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: (Text("Deletado com sucesso")),
+                  ),
+                );
+                refreshFunction();
+              }
+            });
+          }
+        }
+      }
+     );
+
+    } else {
+      return false;
+    }
+  }
+}
