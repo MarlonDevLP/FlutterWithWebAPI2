@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Future<dynamic> showConfirmationDialog(
   BuildContext context, {
-  String title = "Atenção",
+  String title = "Atenção!!",
   String content = "Você quer DELETAR?",
   String affirmativeOption = "Confirmar",
 }) {
@@ -17,10 +17,10 @@ Future<dynamic> showConfirmationDialog(
             onPressed: () {
               Navigator.pop(context, false);
             },
-            child:  Text(
+            child: const Text(
               "Cancelar",
               style:
-                  TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+                  TextStyle(color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
           TextButton(
