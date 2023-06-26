@@ -1,14 +1,16 @@
-import 'package:appdiariooo/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
 
-  LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+
+  RegisterScreen({Key? key}) : super(key: key);
   TextEditingController emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
 
   AuthService service = AuthService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +59,12 @@ class LoginScreen extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {
                         login();
+                        // Navigator.pop(context);
                       },
-                    style: ElevatedButton.styleFrom(
+                      style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green, // Background color
-                    ),
-                      child: const Text("Continuar",style: TextStyle(fontSize: 16),)),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          //Navigator.pushNamed(context);
-                          // Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Background color
-                        ),
-                        child: const Text("Registrar-se",style: TextStyle(fontSize: 16),)),
-                  ),
+                      ),
+                      child: const Text("Concluir Cadastro!",style: TextStyle(fontSize: 16),)),
                 ],
               ),
             ),
@@ -81,15 +72,12 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-
   }
   login(){
     String email = emailController.text;
     String password = _password.text;
 
-    service.login(email: email, password: password).then((value) {
-      Navigator.pushNamed(context, value);
-    });
+    service.login(email: email, password: password);
 
   }
 }
