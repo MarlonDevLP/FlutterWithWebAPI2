@@ -1,4 +1,5 @@
 import 'package:appdiariooo/screens/add_journal_screen/add_journal_screen.dart';
+import 'package:appdiariooo/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'models/journal.dart';
@@ -29,9 +30,10 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.bitterTextTheme(),
       ),
-      initialRoute: "home",
+      initialRoute: "login",
       routes: {
         "home": (context) => const HomeScreen(),
+        "login": (context) => const LoginScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == "add-journal") {
