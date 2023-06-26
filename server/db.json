@@ -1,11 +1,30 @@
 {
+  "users": [
+    {
+      "email": "marlon@gmail.com",
+      "password": "$2a$10$nS8cOmt7R4P6XTgbS3UwhOcNhjQNsqSbpvDtZzFCl10qucuzVlVXq",
+      "id": 1
+    }
+  ],
   "learnhttp": {},
   "journals": [
     {
-      "id": "8f5d4c00-110c-11ee-99da-6572c3dc3df3",
-      "content": "tttttttt",
-      "created_at": "2023-06-19 13:02:46.382030",
-      "updated_at": "2023-06-19 13:02:46.382030"
+      "id": "e5721f20-141e-11ee-8dea-05d83a381622",
+      "content": "dgdfgdfggdfgdf",
+      "created_at": "2023-06-18 12:16:58.332373",
+      "updated_at": "2023-06-18 12:16:58.332373"
+    },
+    {
+      "id": "ec18d990-141e-11ee-8dea-05d83a381622",
+      "content": "fdgdfgdf5646",
+      "created_at": "2023-06-21 12:16:58.332373",
+      "updated_at": "2023-06-21 12:16:58.332373"
+    },
+    {
+      "id": "f126cb90-141e-11ee-8dea-05d83a381622",
+      "content": "gfdgdfgdfdfggrerett",
+      "created_at": "2023-06-24 12:16:58.332373",
+      "updated_at": "2023-06-24 12:16:58.332373"
     }
   ]
 }

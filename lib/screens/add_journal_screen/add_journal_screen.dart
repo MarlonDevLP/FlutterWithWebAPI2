@@ -14,9 +14,9 @@ class AddJournalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _contentController.text = journal.content;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white70,
       appBar: AppBar(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.black54,
         title: Text(WeekDay(journal.createdAt).toString(),
           style: const TextStyle(fontSize: 16),),
         actions: [
