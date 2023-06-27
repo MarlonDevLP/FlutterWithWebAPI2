@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 import '../../services/auth_service.dart';
 
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
 
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key, required this.taskContext}) : super(key: key);
+  final BuildContext taskContext;
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController _password = TextEditingController();
+
+  final TextEditingController _password = TextEditingController();
 
   AuthService service = AuthService();
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +39,7 @@ class RegisterScreen extends StatelessWidget {
                     color: Colors.green,
                   ),
                   const Text(
-                    "Simple Journal",
+                    "Register in the Journal",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const Text("By Marlon Silva",
@@ -41,7 +48,7 @@ class RegisterScreen extends StatelessWidget {
                     padding: EdgeInsets.all(8.0),
                     child: Divider(thickness: 2),
                   ),
-                  const Text("Entre ou Registre-se", style: TextStyle(fontSize: 16),),
+                  const Text("Registre-se", style: TextStyle(fontSize: 16),),
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
@@ -56,10 +63,15 @@ class RegisterScreen extends StatelessWidget {
                     maxLength: 16,
                     obscureText: true,
                   ),
+                  TextField(
+                    controller: _password,
+                    decoration: const InputDecoration(label: Text("Digite Novamente Senha")),
+                    keyboardType: TextInputType.visiblePassword,
+                    maxLength: 16,
+                  ),
                   ElevatedButton(
                       onPressed: () {
-                        login();
-                        // Navigator.pop(context);
+                        Navigator.pop(context,MaterialPageRoute(builder: (context) => login()));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green, // Background color
@@ -73,6 +85,7 @@ class RegisterScreen extends StatelessWidget {
       ),
     );
   }
+
   login(){
     String email = emailController.text;
     String password = _password.text;
