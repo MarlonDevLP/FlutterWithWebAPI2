@@ -18,8 +18,6 @@ class LoginScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.all(0),
-        decoration:
-            BoxDecoration(border: Border.all(width: 8), color: Colors.grey),
         child: Form(
           child: Center(
             child: SingleChildScrollView(
@@ -102,7 +100,6 @@ class LoginScreen extends StatelessWidget {
   login() {
     String email = emailController.text;
     String password = _password.text;
-
     service.login(email: email, password: password);
   }
 }

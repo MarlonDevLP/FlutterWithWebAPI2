@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/auth_service.dart';
 
-
 class RegisterScreen extends StatefulWidget {
-
   const RegisterScreen({Key? key, required this.taskContext}) : super(key: key);
   final BuildContext taskContext;
 
@@ -22,12 +20,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black54,
+      ),
       backgroundColor: Colors.grey,
       body: Container(
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.all(0),
-        decoration:
-        BoxDecoration(border: Border.all(width: 8), color: Colors.grey),
         child: Form(
           child: Center(
             child: SingleChildScrollView(
@@ -43,12 +42,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const Text("By Marlon Silva",
-                      style: TextStyle(fontStyle: FontStyle.italic, fontSize: 17)),
+                      style:
+                          TextStyle(fontStyle: FontStyle.italic, fontSize: 17)),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Divider(thickness: 2),
                   ),
-                  const Text("Registre-se", style: TextStyle(fontSize: 16),),
+                  const Text(
+                    "Registre-se",
+                    style: TextStyle(fontSize: 16),
+                  ),
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
@@ -63,20 +66,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     maxLength: 16,
                     obscureText: true,
                   ),
-                  TextField(
-                    controller: _password,
-                    decoration: const InputDecoration(label: Text("Digite Novamente Senha")),
-                    keyboardType: TextInputType.visiblePassword,
-                    maxLength: 16,
-                  ),
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context,MaterialPageRoute(builder: (context) => login()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green, // Background color
-                      ),
-                      child: const Text("Concluir Cadastro!",style: TextStyle(fontSize: 16),)),
+                    onPressed: () {
+                      Navigator.pop(context,
+                          MaterialPageRoute(builder: (context) => login()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
+                    child: const Text(
+                      "Concluir Cadastro!",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -85,12 +87,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-
-  login(){
+  login() {
     String email = emailController.text;
     String password = _password.text;
 
     service.login(email: email, password: password);
-
   }
 }
